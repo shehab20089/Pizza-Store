@@ -8,7 +8,7 @@ const PizzaCard = props => {
           <img src="/pizza1.jpg" alt="" />
         </div>
         <div className="card-title">
-          <h2>Pizza 1</h2>
+          <h2>{props.title}</h2>
         </div>
         <div className="card-description">
           <p>

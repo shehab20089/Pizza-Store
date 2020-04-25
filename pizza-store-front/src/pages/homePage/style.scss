@@ -1,0 +1,15 @@
+.menu-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2%;
+    width: 95%;
+    margin: 0 auto;
+
+    @media (max-width: 750px) {
+        grid-template-columns: 1fr;
+        width: 85%;
+
+
+    }
+
+}
