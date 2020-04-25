@@ -1,7 +1,12 @@
 import React from "react";
+import PizzaCard from "../../components/pizzaCard";
 
-const index = () => {
-  return <div>Home</div>;
+const HomePage = () => {
+  return (
+    <div>
+      <PizzaCard />
+    </div>
+  );
 };
 
-export default index;
+export default HomePage;

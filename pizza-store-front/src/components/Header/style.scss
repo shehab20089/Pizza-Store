@@ -16,11 +16,13 @@ $secondryColor: #f44336;
     width: 70px;
     height: 70px;
   }
+
   form {
     flex: 1;
     display: flex;
     align-items: center;
   }
+
   .search-btn {
     // flex: 1;
     height: 52%;
@@ -28,9 +30,11 @@ $secondryColor: #f44336;
     justify-content: center;
     align-items: center;
     width: 10%;
+    font-size: 0.63em;
     background: #f44336;
     color: white;
   }
+
   input {
     width: 90%;
     border: none;
@@ -49,6 +53,7 @@ $secondryColor: #f44336;
     width: 10%;
     text-decoration: none;
     color: white;
+    font-size: 0.63em;
     transition: 0.4s;
 
     &:hover {
