@@ -2,20 +2,26 @@ $primaryColor: #37474f;
 $secondryColor: #f44336;
 
 .card-container {
-    // height: 500px;
+    position: relative;
+    padding-bottom: 20%;
+    min-height: 500px;
     width: 100%;
-    // margin: 10%;
-    box-shadow: 0 20px 50px rgba(59, 43, 91, 0.3);
+    box-shadow: 0 20px 25px rgba(59, 43, 91, 0.3);
     border-radius: 10px;
     transition: 0.4s;
 
     &:hover {
-        box-shadow: 0 20px 50px rgba(59, 43, 91, 0.65);
+        box-shadow: 0 10px 25px rgba(59, 43, 91, 0.65);
+
+    }
+
+    @media (max-width:750px) {
+        min-height: 450px;
 
     }
 
     .image-container {
-        height: 50%;
+        height: 250px;
         overflow: hidden;
 
         img {
@@ -46,11 +52,14 @@ $secondryColor: #f44336;
     }
 
     .card-footer {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
 
         button {
             border: none;
             outline: none;
-            margin-top: 10%;
             background: $secondryColor;
             cursor: pointer;
             color: white;

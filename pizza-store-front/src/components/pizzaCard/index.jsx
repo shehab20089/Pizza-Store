@@ -5,16 +5,13 @@ const PizzaCard = props => {
     <div>
       <div className="card-container">
         <div className="image-container">
-          <img src="/pizza1.jpg" alt="" />
+          <img src="/pizza1.jpg" alt="no pizza image" />
         </div>
         <div className="card-title">
           <h2>{props.title}</h2>
         </div>
         <div className="card-description">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt
-            dolor amet quae quibusdam
-          </p>
+          <p>{props.description}</p>
         </div>
         <div className=" card-footer">
           <button>Add To cart</button>
