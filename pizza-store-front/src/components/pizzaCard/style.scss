@@ -3,8 +3,8 @@ $secondryColor: #f44336;
 
 .card-container {
     position: relative;
-    padding-bottom: 20%;
-    min-height: 500px;
+    padding-bottom: 30%;
+    min-height: 590px;
     width: 100%;
     box-shadow: 0 20px 25px rgba(59, 43, 91, 0.3);
     border-radius: 10px;
@@ -16,12 +16,12 @@ $secondryColor: #f44336;
     }
 
     @media (max-width:750px) {
-        min-height: 450px;
+        min-height: 400px;
 
     }
 
     .image-container {
-        height: 250px;
+        height: 50%;
         overflow: hidden;
 
         img {
