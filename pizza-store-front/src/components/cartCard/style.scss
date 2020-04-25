@@ -1,46 +1,40 @@
 $primaryColor: #37474f;
 $secondryColor: #f44336;
 
-.card-container {
+.cart-item-container {
     position: relative;
-    padding-bottom: 30%;
-    min-height: 590px;
+    display: flex;
+    // padding-bottom: 30%;
+    // min-height: 590px;
     width: 100%;
-    box-shadow: 0 20px 25px rgba(59, 43, 91, 0.3);
+    box-shadow: 0 10px 15px rgba(59, 43, 91, 0.3);
     border-radius: 10px;
     transition: 0.4s;
 
     &:hover {
-        box-shadow: 0 10px 25px rgba(59, 43, 91, 0.65);
-
-    }
-
-    @media (max-width:1100px) {
-        min-height: 480px;
-
-    }
-
-    @media (max-width:900px) {
-        min-height: 450px;
-
-    }
-
-    @media (max-width:800px) {
-        min-height: 400px;
+        box-shadow: 0 10px 15px rgba(59, 43, 91, 0.65);
 
     }
 
     .image-container {
-        height: 50%;
+        // height: 50%;
+
+        width: 15%;
         overflow: hidden;
+
+        @media (max-width:768px) {
+            width: 100%;
+        }
 
         img {
             width: 100%;
             height: 100%;
+
             transition: 0.4s;
 
             &:hover {
                 transform: scale(1.1);
+
             }
         }
 
@@ -48,22 +42,37 @@ $secondryColor: #f44336;
     }
 
 
-    .card-title {
-        margin: 2%;
+    .cart-item-title {
+        margin: 1% 2%;
         text-align: center;
         color: $secondryColor;
     }
 
-    .card-description {
+    .cart-item-description {
         text-align: center;
         font-size: 0.63em;
     }
 
-    .card-footer {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        left: 0;
+    .cart-item-footer {
+        margin: 1%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        @media (max-width:768px) {
+            width: 100%;
+        }
+
+        input {
+            width: 30%;
+            height: 30px;
+
+            @media (max-width:768px) {
+                width: 100%;
+            }
+        }
 
         button {
             border: none;
@@ -72,7 +81,8 @@ $secondryColor: #f44336;
             cursor: pointer;
             color: white;
             width: 100%;
-            height: 60px;
+            padding: 5%;
+            // height: 60px;
             font-size: 0.8em;
             transition: 0.4s;
 
