@@ -14,7 +14,10 @@ const cartCard = props => {
           <p>{props.description}</p>
         </div>
         <div className=" cart-item-footer">
-          <input type="number" />
+          <div className="quntity">
+            <p>Qty:</p>
+            <input type="number" />
+          </div>
           <button>Remove</button>
         </div>
       </div>
