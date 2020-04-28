@@ -1,29 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect, Provider, useSelector, useDispatch } from "react-redux";
+
 import PizzaCard from "../../components/pizzaCard";
 import "./style.scss";
 const HomePage = () => {
-  let arr = Array.from(Array(10).keys());
-  let cards = arr.map((val, index) => {
+  const products = useSelector(state => state.productReducer.products);
+
+  let cards = products.map((pizza, index) => {
     return (
       <PizzaCard
-        title={`Pizza${index + 1}`}
-        description={
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Inciduntdolor amet quae quibusdam"
-        }
+        title={pizza.name}
+        description={pizza.description}
         key={index}
       />
     );
   });
   return (
     <div>
-      <div className="menu-container">
-        <PizzaCard
-          title={`Pizza${16 + 1}`}
-          description={"Lorem  amet quae quibusdam"}
-          key={16}
-        />
-        {cards}
-      </div>
+      <div className="menu-container">{cards}</div>
     </div>
   );
 };

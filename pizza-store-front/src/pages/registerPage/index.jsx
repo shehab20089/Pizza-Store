@@ -1,31 +1,73 @@
 import React, { useState } from "react";
 import AuthForm from "../../components/authForm/index";
+import API from "../../api/api";
+import { connect, Provider, useSelector, useDispatch } from "react-redux";
 
 const RegisterPage = () => {
   const [role, setrole] = useState("user");
   let changeActive = val => {
     setrole(val);
   };
+  const dispatch = useDispatch();
+  const [registerData, setregisterData] = useState({});
+  const submit = async event => {
+    event.preventDefault();
+    let data = { ...registerData, IsAdmin: role == "admin" ? "admin" : false };
+
+    try {
+      let registerResponse = await API.post("/user/register", { ...data });
+      localStorage.setItem("pizza-token", registerResponse.data.token);
+      dispatch({ type: "changeStatus", payload: true });
+      dispatch({ type: "setUser", payload: registerResponse.data.user });
+    } catch (err) {
+      console.log(err.request.response);
+    }
+  };
+
+  const handleOnChange = e => {
+    const { value, name } = e.target;
+    console.log(name);
+    console.log(value);
+    setregisterData({ ...registerData, [name]: value });
+  };
 
   return (
     <div>
-      <AuthForm title="Register">
+      <AuthForm title="Register" submit={submit}>
         <div className="input-group">
           <label htmlFor="email">Email:</label>
           <div className="frm-input">
-            <input type="email" id="email" placeholder="Enter Your Email" />
+            <input
+              type="email"
+              name="email"
+              id="email"
+              onChange={handleOnChange}
+              placeholder="Enter Your Email"
+            />
           </div>
         </div>
         <div className="input-group">
-          <label htmlFor="Name">Name:</label>
+          <label htmlFor="FirstName">First Name:</label>
           <div className="frm-input">
-            <input type="text" id="Name" placeholder="Enter Your Name" />
+            <input
+              type="text"
+              id="FirstName"
+              name="fname"
+              onChange={handleOnChange}
+              placeholder="Enter Your first name"
+            />
           </div>
         </div>
         <div className="input-group">
-          <label htmlFor="Address">Address:</label>
+          <label htmlFor="lastName">Last Name:</label>
           <div className="frm-input">
-            <input type="text" id="Address" placeholder="Enter Your Address" />
+            <input
+              type="text"
+              id="lastName"
+              name="lname"
+              onChange={handleOnChange}
+              placeholder="Enter Your last Name"
+            />
           </div>
         </div>
         <div className="input-group">
@@ -44,7 +86,7 @@ const RegisterPage = () => {
               admin
             </div>
           </div>
-          {role == "admin" ? (
+          {/* {role == "admin" ? (
             <div className="frm-input">
               <input
                 type="admin"
@@ -53,7 +95,7 @@ const RegisterPage = () => {
             </div>
           ) : (
             ""
-          )}
+          )} */}
         </div>
         <div className="input-group">
           <label htmlFor="pass">Password:</label>
@@ -61,7 +103,9 @@ const RegisterPage = () => {
             <input
               type="password"
               id="pass"
+              name="password"
               placeholder="Enter Your password"
+              onChange={handleOnChange}
             />
           </div>
         </div>
@@ -72,7 +116,9 @@ const RegisterPage = () => {
             <input
               type="password"
               id="Cpass"
+              name="confirmPass"
               placeholder="please confirm your password"
+              onChange={handleOnChange}
             />
           </div>
         </div>
