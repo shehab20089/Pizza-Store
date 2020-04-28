@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import AuthForm from "../../components/authForm/index";
 import API from "../../api/api";
+import { useDispatch } from "react-redux";
 
 const LoginPage = () => {
   const [loginData, setloginData] = useState({ email: "", password: "" });
+  const dispatch = useDispatch();
   const submit = async event => {
     event.preventDefault();
     console.log({ ...loginData });
     try {
-      await API.post("/user/login", { ...loginData });
+      let loginResponse = await API.post("/user/login", { ...loginData });
+      localStorage.setItem("pizza-token", loginResponse.data.token);
+      dispatch({ type: "changeStatus", payload: true });
+      let userResponse = await API.get("/user", {
+        headers: { Authorization: `Bearer ${loginResponse.data.token}` }
+      });
+      dispatch({ type: "setUser", payload: userResponse });
     } catch (err) {
       console.log(err.request.response);
     }
@@ -23,7 +31,6 @@ const LoginPage = () => {
   };
   return (
     <div>
-      {loginData.email}
       <AuthForm title="Login" submit={submit}>
         <div className="input-group">
           <label htmlFor="email">Email:</label>

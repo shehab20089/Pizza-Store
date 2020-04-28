@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AuthForm from "../../components/authForm/index";
 import API from "../../api/api";
-import { connect, Provider, useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const RegisterPage = () => {
   const [role, setrole] = useState("user");

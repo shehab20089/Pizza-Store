@@ -6,9 +6,7 @@ import Register from "./pages/registerPage/index";
 import Cart from "./pages/cartPage/index";
 import Addproduct from "./pages/addProductPage/index";
 import Error from "./pages/ErrorPage/index";
-import { createStore } from "redux";
-import rootReducer from "./store/store";
-import { connect, Provider, useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   BrowserRouter as Router,
   Switch,
@@ -46,6 +44,11 @@ function App() {
     }
     fetchData();
   }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("pizza-token");
+    dispatch({ type: "setUser", payload: {} });
+    dispatch({ type: "changeStatus", payload: false });
+  };
   return (
     <Router>
       <Header>
@@ -71,7 +74,9 @@ function App() {
             </NavLink>
           </>
         ) : (
-          ""
+          <a className="nav-link" onClick={handleLogout}>
+            Logout
+          </a>
         )}
 
         <NavLink className="nav-link" activeClassName="activeLink" to="/cart">
