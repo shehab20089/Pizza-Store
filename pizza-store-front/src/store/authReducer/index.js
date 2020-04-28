@@ -10,7 +10,6 @@ export const authReducer = (state = inintState, action) => {
     case "setUser":
       return { ...state, user: action.payload };
 
-    //define more cases as your project builds.
     default:
       return state;
   }

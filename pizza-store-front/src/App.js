@@ -62,7 +62,7 @@ function App() {
           Home
         </NavLink>
         <NavLink className="nav-link" activeClassName="activeLink" to="/cart">
-          cart
+          Cart
         </NavLink>
         {!status ? (
           <>
