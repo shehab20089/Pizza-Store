@@ -6,6 +6,7 @@ import Register from "./pages/registerPage/index";
 import Cart from "./pages/cartPage/index";
 import Addproduct from "./pages/addProductPage/index";
 import Error from "./pages/ErrorPage/index";
+import { useHistory, withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   BrowserRouter as Router,
@@ -17,7 +18,9 @@ import "./App.scss";
 import API from "./api/api";
 
 function App() {
+  const history = useHistory();
   const status = useSelector(state => state.authReducer.isLoggedIn);
+  const user = useSelector(state => state.authReducer.user);
   const products = useSelector(state => state.productReducer.products);
 
   const dispatch = useDispatch();
@@ -39,7 +42,7 @@ function App() {
         let userResponse = await API.get("/user", {
           headers: { Authorization: `Bearer ${token}` }
         });
-        dispatch({ type: "setUser", payload: userResponse });
+        dispatch({ type: "setUser", payload: userResponse["data"].user });
       }
     }
     fetchData();
@@ -48,12 +51,18 @@ function App() {
     localStorage.removeItem("pizza-token");
     dispatch({ type: "setUser", payload: {} });
     dispatch({ type: "changeStatus", payload: false });
+    history.push("/");
   };
   return (
-    <Router>
+    <>
       <Header>
+        {status ? <a className="nav-link">{"Hi " + user.firstName}</a> : ""}
+
         <NavLink className="nav-link" activeClassName="activeLink" exact to="/">
           Home
+        </NavLink>
+        <NavLink className="nav-link" activeClassName="activeLink" to="/cart">
+          cart
         </NavLink>
         {!status ? (
           <>
@@ -64,7 +73,6 @@ function App() {
             >
               login
             </NavLink>
-
             <NavLink
               className="nav-link"
               activeClassName="activeLink"
@@ -74,14 +82,32 @@ function App() {
             </NavLink>
           </>
         ) : (
-          <a className="nav-link" onClick={handleLogout}>
-            Logout
-          </a>
-        )}
+          <>
+            {user.IsAdmin ? (
+              <NavLink
+                className="nav-link"
+                activeClassName="activeLink"
+                to="/add"
+              >
+                Add Product
+              </NavLink>
+            ) : (
+              <>
+                <NavLink
+                  className="nav-link"
+                  activeClassName="activeLink"
+                  to="/history"
+                >
+                  history
+                </NavLink>
+              </>
+            )}
 
-        <NavLink className="nav-link" activeClassName="activeLink" to="/cart">
-          cart
-        </NavLink>
+            <a className="nav-link" onClick={handleLogout}>
+              Logout
+            </a>
+          </>
+        )}
       </Header>
       <div>
         {/* A <Switch> looks through its children <Route>s and
@@ -107,7 +133,7 @@ function App() {
           </Route>
         </Switch>
       </div>
-    </Router>
+    </>
   );
 }
 

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import AuthForm from "../../components/authForm/index";
 import API from "../../api/api";
 import { useSelector, useDispatch } from "react-redux";
 
 const RegisterPage = () => {
+  const history = useHistory();
   const [role, setrole] = useState("user");
   let changeActive = val => {
     setrole(val);
@@ -19,6 +21,7 @@ const RegisterPage = () => {
       localStorage.setItem("pizza-token", registerResponse.data.token);
       dispatch({ type: "changeStatus", payload: true });
       dispatch({ type: "setUser", payload: registerResponse.data.user });
+      history.push("/");
     } catch (err) {
       console.log(err.request.response);
     }

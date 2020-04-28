@@ -1,14 +1,66 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import AuthForm from "../../components/authForm/index";
+import API from "../../api/api";
+import { useSelector, useDispatch } from "react-redux";
 
 const AddProuctPage = () => {
+  const history = useHistory();
+  const [productData, setproductData] = useState({});
+
+  const dispatch = useDispatch();
+  const submit = async event => {
+    event.preventDefault();
+    console.log(productData);
+    let frmd = new FormData();
+
+    for (var key in productData) {
+      frmd.append(key, productData[key]);
+    }
+
+    try {
+      let productResponse = await API.post(
+        "/product/add",
+
+        frmd,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("pizza-token")}`
+          }
+        }
+      );
+
+      dispatch({
+        type: "setProduct",
+        payload: productResponse.data.Product
+      });
+      history.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleOnChange = e => {
+    const { value, name } = e.target;
+    setproductData({ ...productData, [name]: value });
+  };
+  const handleImageUpload = e => {
+    let imgFormData = e.target.files[0];
+    setproductData({ ...productData, image: imgFormData });
+  };
   return (
     <div>
-      <AuthForm title="Add Pizza">
+      <AuthForm submit={submit} title="Add Pizza">
         <div className="input-group">
-          <label htmlFor="email">Pizza Name:</label>
+          <label htmlFor="name">Pizza Name:</label>
           <div className="frm-input">
-            <input type="email" id="email" placeholder="Enter Pizza Name" />
+            <input
+              type="text"
+              id="name"
+              name="name"
+              onChange={handleOnChange}
+              placeholder="Enter Pizza Name"
+            />
           </div>
         </div>
         <div className="input-group">
@@ -16,6 +68,8 @@ const AddProuctPage = () => {
           <div className="frm-input">
             <input
               type="text"
+              name="description"
+              onChange={handleOnChange}
               id="description"
               placeholder="Enter pizza  description"
             />
@@ -26,6 +80,8 @@ const AddProuctPage = () => {
           <div className="frm-input">
             <input
               type="file"
+              name="image"
+              onChange={handleImageUpload}
               id="image"
               accept="image/*"
               placeholder="upload pizza image"
@@ -35,7 +91,13 @@ const AddProuctPage = () => {
         <div className="input-group">
           <label htmlFor="price">Price:</label>
           <div className="frm-input">
-            <input type="text" id="price" placeholder="Enter Pizza price" />
+            <input
+              type="text"
+              id="price"
+              name="price"
+              onChange={handleOnChange}
+              placeholder="Enter Pizza price"
+            />
           </div>
         </div>
       </AuthForm>

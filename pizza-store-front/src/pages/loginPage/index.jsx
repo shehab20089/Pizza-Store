@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import AuthForm from "../../components/authForm/index";
 import API from "../../api/api";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 const LoginPage = () => {
+  const history = useHistory();
   const [loginData, setloginData] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
   const submit = async event => {
@@ -16,7 +18,8 @@ const LoginPage = () => {
       let userResponse = await API.get("/user", {
         headers: { Authorization: `Bearer ${loginResponse.data.token}` }
       });
-      dispatch({ type: "setUser", payload: userResponse });
+      dispatch({ type: "setUser", payload: userResponse["data"].user });
+      history.push("/");
     } catch (err) {
       console.log(err.request.response);
     }
