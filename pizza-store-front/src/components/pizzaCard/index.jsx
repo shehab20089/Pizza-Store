@@ -5,7 +5,10 @@ const PizzaCard = props => {
     <div>
       <div className="card-container">
         <div className="image-container">
-          <img src="/pizza1.jpg" alt="no pizza image" />
+          <img
+            src={` ${process.env.REACT_APP_baseUrl}/${props.image}`}
+            alt="no pizza image"
+          />
         </div>
         <div className="card-title">
           <h2>{props.title}</h2>

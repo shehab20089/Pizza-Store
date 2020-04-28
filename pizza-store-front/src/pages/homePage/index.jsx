@@ -10,6 +10,7 @@ const HomePage = () => {
     return (
       <PizzaCard
         title={pizza.name}
+        image={pizza.image}
         description={pizza.description}
         key={index}
       />
