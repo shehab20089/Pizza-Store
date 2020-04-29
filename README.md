@@ -11,6 +11,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### `npm start`
 
+### `change .env.local.clone to .env.local`
+
 ## Available Scripts
 
 In the project directory, you can run:
