@@ -19,7 +19,6 @@ const PizzaCard = props => {
     setquantity(e.target.value);
   };
   const addToCart = () => {
-    console.log(props.pizza);
     dispatch({
       type: "addTocart",
       payload: { ...props.pizza, quantity: quantity }

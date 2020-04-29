@@ -29,14 +29,14 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      console.log(products);
-
       let productResponse = await API.get("/product");
       dispatch({
         type: "setProducts",
         payload: productResponse.data.products
       });
-
+      dispatch({
+        type: "intializeCart"
+      });
       let token = localStorage.getItem("pizza-token");
       if (token) {
         dispatch({ type: "changeStatus", payload: true });
