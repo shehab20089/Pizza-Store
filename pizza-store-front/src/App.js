@@ -6,6 +6,7 @@ import Register from "./pages/registerPage/index";
 import Cart from "./pages/cartPage/index";
 import Addproduct from "./pages/addProductPage/index";
 import HistoryPage from "./pages/historyPage";
+import SearchPage from "./pages/searchPage";
 import Error from "./pages/ErrorPage/index";
 import { useHistory, withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -129,9 +130,13 @@ function App() {
           <Route path="/add">
             <Addproduct />
           </Route>
-          <Route>
+          <Route path="/history">
             <HistoryPage />
           </Route>
+          <Route path="/search/:searchResult">
+            <SearchPage />
+          </Route>
+
           <Route>
             <Error />
           </Route>
