@@ -25,7 +25,9 @@ export const cartReducer = (state = inintState, action) => {
       return { ...state, cart: [...filterdArray, action.payload] };
     case "edititem":
       let newArr = state.cart.map((item, index) => {
-        if (item._id != action.payload._id) item.quantity = action.payload;
+        if (item._id == action.payload._id)
+          item.quantity = action.payload.quantity;
+        console.log(item);
         return item;
       });
       localStorage.setItem("cart-items", JSON.stringify([...newArr]));

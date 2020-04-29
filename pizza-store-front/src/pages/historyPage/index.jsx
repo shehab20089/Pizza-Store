@@ -27,7 +27,7 @@ const History = () => {
     <>
       <div className="container-history">
         {order.map((item, index) => {
-          return <OrderCard order={item} index={index} />;
+          return <OrderCard order={item} index={index} key={index} />;
         })}
       </div>
       {order.length >= 1 ? (

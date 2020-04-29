@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import AuthForm from "../../components/authForm/index";
+import { toast } from "react-toastify";
 import API from "../../api/api";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -15,15 +16,24 @@ const RegisterPage = () => {
   const submit = async event => {
     event.preventDefault();
     let data = { ...registerData, IsAdmin: role == "admin" ? "admin" : false };
-
+    console.log(data);
+    if (data.confirmPass != data.password) {
+      toast.warn(`password and confirm password don't match`);
+      return;
+    }
     try {
       let registerResponse = await API.post("/user/register", { ...data });
       localStorage.setItem("pizza-token", registerResponse.data.token);
       dispatch({ type: "changeStatus", payload: true });
       dispatch({ type: "setUser", payload: registerResponse.data.user });
+      toast.error(`Register successfully`);
+
       history.push("/");
     } catch (err) {
-      console.log(err.request.response);
+      toast.warn(`${err.response.data.error}`);
+
+      console.log("err.request.response");
+      console.log(err.response.data.error);
     }
   };
 
@@ -46,6 +56,7 @@ const RegisterPage = () => {
               id="email"
               onChange={handleOnChange}
               placeholder="Enter Your Email"
+              required
             />
           </div>
         </div>
@@ -58,6 +69,7 @@ const RegisterPage = () => {
               name="fname"
               onChange={handleOnChange}
               placeholder="Enter Your first name"
+              required
             />
           </div>
         </div>
@@ -70,6 +82,7 @@ const RegisterPage = () => {
               name="lname"
               onChange={handleOnChange}
               placeholder="Enter Your last Name"
+              required
             />
           </div>
         </div>
@@ -109,12 +122,13 @@ const RegisterPage = () => {
               name="password"
               placeholder="Enter Your password"
               onChange={handleOnChange}
+              required
             />
           </div>
         </div>
 
         <div className="input-group">
-          <label htmlFor="Cpass">Password:</label>
+          <label htmlFor="Cpass">Confirm Password:</label>
           <div className="frm-input">
             <input
               type="password"
@@ -122,6 +136,7 @@ const RegisterPage = () => {
               name="confirmPass"
               placeholder="please confirm your password"
               onChange={handleOnChange}
+              required
             />
           </div>
         </div>

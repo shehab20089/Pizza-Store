@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./style.scss";
+import { toast } from "react-toastify";
 import { connect, Provider, useSelector, useDispatch } from "react-redux";
 const CartCard = props => {
   const dispatch = useDispatch();
@@ -7,17 +8,23 @@ const CartCard = props => {
   const onQuantityChange = e => {
     if (e.target.value > 50) {
       setquantity(50);
+      dispatch({ type: "edititem", payload: { ...props.pizza, quantity: 50 } });
       return;
     } else if (e.target.value < 1) {
       console.log(quantity);
       setquantity(1);
+      dispatch({ type: "edititem", payload: { ...props.pizza, quantity: 50 } });
+
       return;
     }
     setquantity(e.target.value);
-    dispatch({ type: "edititem", payload: e.target.value });
+    dispatch({
+      type: "edititem",
+      payload: { ...props.pizza, quantity: e.target.value }
+    });
   };
   const removeFromCart = () => {
-    console.log(props.index);
+    toast.error("Item removed successfully");
     dispatch({
       type: "removeItem",
       payload: props.index

@@ -3,6 +3,9 @@ import "./style.scss";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const PizzaCard = props => {
   const dispatch = useDispatch();
 
@@ -19,6 +22,8 @@ const PizzaCard = props => {
     setquantity(e.target.value);
   };
   const addToCart = () => {
+    toast.error(` ${quantity} item added successfully to cart`);
+
     dispatch({
       type: "addTocart",
       payload: { ...props.pizza, quantity: quantity }

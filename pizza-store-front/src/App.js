@@ -7,6 +7,7 @@ import Cart from "./pages/cartPage/index";
 import Addproduct from "./pages/addProductPage/index";
 import HistoryPage from "./pages/historyPage";
 import SearchPage from "./pages/searchPage";
+import { ToastContainer, toast } from "react-toastify";
 import Error from "./pages/ErrorPage/index";
 import { useHistory, withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,7 +19,13 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import API from "./api/api";
-
+toast.configure({
+  autoClose: 4000,
+  hideProgressBar: true,
+  style: { width: "auto", minWidth: "30%" },
+  draggable: true,
+  position: toast.POSITION.TOP_LEFT
+});
 function App() {
   const history = useHistory();
   const status = useSelector(state => state.authReducer.isLoggedIn);
@@ -53,6 +60,8 @@ function App() {
     localStorage.removeItem("pizza-token");
     dispatch({ type: "setUser", payload: {} });
     dispatch({ type: "changeStatus", payload: false });
+    toast.error("you have been logged out");
+
     history.push("/");
   };
   return (

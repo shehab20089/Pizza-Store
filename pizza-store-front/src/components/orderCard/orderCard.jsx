@@ -13,9 +13,9 @@ const OrderCard = props => {
         <p>products :</p>
       </div>
 
-      {props.order.Products.map(i => {
+      {props.order.Products.map((i, index) => {
         return (
-          <div className="order-products">
+          <div className="order-products" key={index}>
             <p>name: {i.name}</p>
             <p>quantity: {i.quantity}</p>
           </div>

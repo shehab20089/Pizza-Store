@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import AuthForm from "../../components/authForm/index";
+import { toast } from "react-toastify";
+
 import API from "../../api/api";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -19,8 +21,13 @@ const LoginPage = () => {
         headers: { Authorization: `Bearer ${loginResponse.data.token}` }
       });
       dispatch({ type: "setUser", payload: userResponse["data"].user });
+      toast.error(
+        `Login success welcome ${userResponse["data"].user.firstName} `
+      );
+
       history.push("/");
     } catch (err) {
+      toast.warn(`Invalid credentials`);
       console.log(err.request.response);
     }
   };

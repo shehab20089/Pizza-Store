@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CartCard from "../../components/cartCard";
 import CheckoutModal from "../../components/checkoutModal";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import API from "../../api/api";
 import { connect, Provider, useSelector, useDispatch } from "react-redux";
 import "./style.scss";
@@ -35,8 +36,12 @@ const Cart = () => {
       console.log(options);
       let orderResponse = await API.post("/order/", { ...data }, options);
       dispatch({ type: "restCart" });
+      toast.error("order successfully submitted");
+
       history.push("/");
     } catch (err) {
+      toast.warn("an unexcepected error occured");
+
       console.log(err.request.response);
     }
   };
@@ -91,6 +96,7 @@ const Cart = () => {
                 name="name"
                 id="name"
                 placeholder="Enter Your Name"
+                required
               />
             </div>
           </div>
@@ -103,6 +109,7 @@ const Cart = () => {
                 name="Address"
                 id="Address"
                 placeholder="Enter Shopping Address"
+                required
               />
             </div>
           </div>
@@ -115,6 +122,7 @@ const Cart = () => {
                 name="phone"
                 id="Phone"
                 placeholder="Enter Your Phone"
+                required
               />
             </div>
           </div>
@@ -146,7 +154,7 @@ const Cart = () => {
       </div>
       <div className="container">
         {cartItems.map((item, index) => {
-          return <CartCard pizza={item} index={index}></CartCard>;
+          return <CartCard pizza={item} index={index} key={index}></CartCard>;
         })}
       </div>
       {cartItems.length >= 1 ? (
