@@ -118,6 +118,19 @@ const Cart = () => {
               />
             </div>
           </div>
+          <div className="price-text"> Delivery price: 18 $</div>
+          <div className="price-text">
+            {" "}
+            Order price:{" "}
+            {cartItems
+              .map(item => {
+                return item.price * item.quantity;
+              })
+              .reduce((a, b) => {
+                return a + b;
+              }, 0)}{" "}
+            $
+          </div>
           <div className="price-text">
             Total price:{" "}
             {cartItems
@@ -126,7 +139,7 @@ const Cart = () => {
               })
               .reduce((a, b) => {
                 return a + b;
-              }, 0)}{" "}
+              }, 0) + 18}{" "}
             $
           </div>
         </CheckoutModal>
