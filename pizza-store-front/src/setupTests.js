@@ -2,4 +2,17 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom/extend-expect';
+import "@testing-library/jest-dom/extend-expect";
+import { configure } from "enzyme";
+import * as redux from "react-redux";
+
+import Adapter from "enzyme-adapter-react-16";
+import { useSelector, useDispatch } from "react-redux";
+
+configure({ adapter: new Adapter() });
+
+jest.mock("react-router-dom", () => ({
+  useHistory: () => ({
+    push: jest.fn()
+  })
+}));
