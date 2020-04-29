@@ -4,7 +4,7 @@ $secondryColor: #f44336;
 .card-container {
   position: relative;
   padding-bottom: 30%;
-  min-height: 590px;
+  min-height: 700px;
   width: 100%;
   box-shadow: 0 20px 25px rgba(59, 43, 91, 0.3);
   border-radius: 10px;
@@ -15,15 +15,16 @@ $secondryColor: #f44336;
   }
 
   @media (max-width: 1100px) {
-    min-height: 480px;
+    min-height: 650px;
+
   }
 
   @media (max-width: 900px) {
-    min-height: 450px;
+    min-height: 650px;
   }
 
   @media (max-width: 800px) {
-    min-height: 400px;
+    min-height: 650px;
   }
 
 
