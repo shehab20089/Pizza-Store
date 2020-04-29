@@ -7,14 +7,7 @@ const HomePage = () => {
   const products = useSelector(state => state.productReducer.products);
 
   let cards = products.map((pizza, index) => {
-    return (
-      <PizzaCard
-        title={pizza.name}
-        image={pizza.image}
-        description={pizza.description}
-        key={index}
-      />
-    );
+    return <PizzaCard pizza={pizza} key={index} index={index} />;
   });
   return (
     <div>

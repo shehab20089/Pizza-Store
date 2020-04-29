@@ -23,6 +23,11 @@ export const cartReducer = (state = inintState, action) => {
           ...state.cart.slice(action.payload + 1)
         ]
       };
+    case "restCart":
+      return {
+        ...state,
+        cart: []
+      };
 
     default:
       return state;

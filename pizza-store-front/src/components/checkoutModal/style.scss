@@ -1,0 +1,120 @@
+$primaryColor: #37474f;
+$secondryColor: #f44336;
+
+
+.checkout-container {
+    background-color: white;
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    // margin-top: 5%;
+    border-radius: 10px;
+    transition: 0.4s;
+
+    @media (max-width:750px) {
+        width: 90%;
+
+    }
+
+    .close-icon {
+        position: absolute;
+        right: 2%;
+        top: 2%;
+        cursor: pointer;
+        transition: 0.4s;
+
+        &:hover {
+            color: $secondryColor;
+        }
+    }
+
+    .checkout-title {
+        margin: 2%;
+        text-align: center;
+        color: $secondryColor;
+    }
+
+    .checkout-description {
+        // text-align: center;
+
+        // font-size: 0.63em;
+    }
+
+    .input-group {
+
+
+        label {
+            margin-left: 3%;
+            font-size: 0.7em;
+            text-align: left;
+        }
+
+        .role {
+            margin-left: 3%;
+            margin-bottom: 1%;
+            display: flex;
+            font-size: 0.7em;
+
+            .role-btn {
+                display: flex;
+                justify-content: center;
+                width: 10%;
+                cursor: pointer;
+                border: 1px solid $secondryColor;
+                transition: 0.4s;
+
+                &:hover {
+                    background-color: $secondryColor;
+                    color: white;
+                }
+            }
+
+            .active {
+                background-color: $secondryColor;
+                color: white;
+            }
+        }
+
+        .frm-input {
+            height: 50px;
+            margin: 3%;
+            margin-top: 0;
+
+            input {
+                height: 100%;
+                width: 100%;
+                padding-left: 3%;
+                font-size: 0.7em;
+
+            }
+
+            // background: $primaryColor;
+        }
+    }
+
+    .checkout-footer {
+
+
+        margin: 10% 3%;
+
+        button {
+            margin-bottom: 3%;
+            border: none;
+            outline: none;
+            border: 1px solid $secondryColor;
+            background: none;
+            cursor: pointer;
+            color: $secondryColor;
+            width: 100%;
+            height: 60px;
+            font-size: 0.8em;
+            transition: 0.4s;
+
+            &:hover {
+                background: #f44336d0;
+                color: white;
+
+            }
+        }
+    }
+}
