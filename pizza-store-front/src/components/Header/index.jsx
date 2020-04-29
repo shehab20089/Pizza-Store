@@ -12,14 +12,20 @@ const Header = props => {
     setsearchResult(event.target.value);
   };
   const navigateToSearch = () => {
-    histroy.push(`/search/${searchResult}`);
+    histroy.push(`/search/${searchResult || " "}`);
   };
   return (
     <div className="header">
       <Link className="logo" to="/">
         <img src="/pizzaLogo.png" alt="" />
       </Link>
-      <form action="get">
+      <form
+        action="get"
+        onSubmit={event => {
+          event.preventDefault();
+          navigateToSearch();
+        }}
+      >
         <input
           type="text"
           placeholder="Search for pizza"

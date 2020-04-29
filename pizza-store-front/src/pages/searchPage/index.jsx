@@ -16,6 +16,13 @@ const SearchPage = () => {
   return (
     <div>
       <div className="menu-container">{cards}</div>
+      {cards.length >= 1 ? (
+        ""
+      ) : (
+        <div className="empty-message">
+          No Result was found please try again
+        </div>
+      )}
     </div>
   );
 };
