@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import AuthForm from "../../components/authForm/index";
 import API from "../../api/api";
+import { toast } from "react-toastify";
+
 import { useSelector, useDispatch } from "react-redux";
 
 const AddProuctPage = () => {
@@ -34,8 +36,12 @@ const AddProuctPage = () => {
         type: "setProduct",
         payload: productResponse.data.Product
       });
+      toast.error("Pizza added successfully");
+
       history.push("/");
     } catch (err) {
+      toast.warn("an unexcepected error occured");
+
       console.log(err);
     }
   };

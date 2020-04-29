@@ -8,7 +8,7 @@ const SearchPage = () => {
   const { searchResult } = useParams();
   let cards = products
     .filter(item => {
-      return item.name.indexOf(searchResult) > -1;
+      return item.name.toLowerCase().indexOf(searchResult.toLowerCase()) > -1;
     })
     .map((pizza, index) => {
       return <PizzaCard pizza={pizza} key={index} index={index} />;
