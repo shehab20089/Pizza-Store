@@ -5,6 +5,7 @@ import Login from "./pages/loginPage/index";
 import Register from "./pages/registerPage/index";
 import Cart from "./pages/cartPage/index";
 import Addproduct from "./pages/addProductPage/index";
+import HistoryPage from "./pages/historyPage";
 import Error from "./pages/ErrorPage/index";
 import { useHistory, withRouter } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -127,6 +128,9 @@ function App() {
           </Route>
           <Route path="/add">
             <Addproduct />
+          </Route>
+          <Route>
+            <HistoryPage />
           </Route>
           <Route>
             <Error />

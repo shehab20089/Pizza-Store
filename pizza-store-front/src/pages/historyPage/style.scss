@@ -1,0 +1,27 @@
+$primaryColor: #37474f;
+$secondryColor: #f44336;
+
+.container-history {
+    width: 98%;
+    margin: 3% auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 50px;
+
+    @media (max-width:850px) {
+        width: 98%;
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+.empty-message {
+    height: 75vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+}

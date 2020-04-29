@@ -19,7 +19,8 @@ const Cart = () => {
       data.Products.push({
         id: element._id,
         name: element.name,
-        quantity: element.quantity
+        quantity: element.quantity,
+        price: element.price
       });
     }
     try {
