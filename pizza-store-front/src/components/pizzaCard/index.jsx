@@ -33,10 +33,7 @@ const PizzaCard = props => {
     <div>
       <div className="card-container">
         <div className="image-container">
-          <img
-            src={` ${process.env.REACT_APP_baseUrl}/${props.pizza.image}`}
-            alt="no pizza image"
-          />
+          <img src={props.pizza.image} alt="no pizza image" />
         </div>
         <div className="card-title">
           <h2>{props.pizza.name}</h2>

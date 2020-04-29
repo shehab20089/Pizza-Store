@@ -36,10 +36,7 @@ const CartCard = props => {
       <div className="cart-item-container">
         <div className="img-title">
           <div className="image-container">
-            <img
-              src={` ${process.env.REACT_APP_baseUrl}/${props.pizza.image}`}
-              alt="no pizza image"
-            />
+            <img src={props.pizza.image} alt="no pizza image" />
           </div>
           <div className="cart-item-title">
             <h2>{props.pizza.name}</h2>
