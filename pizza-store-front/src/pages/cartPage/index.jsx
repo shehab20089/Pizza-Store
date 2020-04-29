@@ -118,6 +118,17 @@ const Cart = () => {
               />
             </div>
           </div>
+          <div className="price-text">
+            Total price:{" "}
+            {cartItems
+              .map(item => {
+                return item.price * item.quantity;
+              })
+              .reduce((a, b) => {
+                return a + b;
+              }, 0)}{" "}
+            $
+          </div>
         </CheckoutModal>
       </div>
       <div className="container">
