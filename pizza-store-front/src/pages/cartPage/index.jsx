@@ -165,64 +165,70 @@ const Cart = () => {
         </CheckoutModal>
       </div>
       <div className="cart-contaier">
-        <div className="price-container">
-          {" "}
-          <div className="cart-price">
+        {cartItems.length >= 1 ? (
+          <div className="price-container">
             {" "}
-            <p> Delivery price:</p>{" "}
-            <p>
-              {changeCurrency(currency, 18)} {currency}
-            </p>
-          </div>
-          <div className="cart-price">
-            <p> Order price: </p>
-            <p>
+            <div className="cart-price">
               {" "}
-              {changeCurrency(
-                currency,
-                cartItems
-                  .map(item => {
-                    return item.price * item.quantity;
-                  })
-                  .reduce((a, b) => {
-                    return a + b;
-                  }, 0)
-              )}{" "}
-              {currency}{" "}
-            </p>
+              <p> Delivery price:</p>{" "}
+              <p>
+                {changeCurrency(currency, 18)} {currency}
+              </p>
+            </div>
+            <div className="cart-price">
+              <p> Order price: </p>
+              <p>
+                {" "}
+                {changeCurrency(
+                  currency,
+                  cartItems
+                    .map(item => {
+                      return item.price * item.quantity;
+                    })
+                    .reduce((a, b) => {
+                      return a + b;
+                    }, 0)
+                )}{" "}
+                {currency}{" "}
+              </p>
+            </div>
+            <div className="divider"></div>
+            <div className="cart-price">
+              <p> Total price: </p>
+              <p>
+                {" "}
+                {changeCurrency(
+                  currency,
+                  cartItems
+                    .map(item => {
+                      return item.price * item.quantity;
+                    })
+                    .reduce((a, b) => {
+                      return a + b;
+                    }, 0 + 18)
+                )}{" "}
+                {currency}
+              </p>
+            </div>
           </div>
-          <div className="divider"></div>
-          <div className="cart-price">
-            <p> Total price: </p>
-            <p>
-              {" "}
-              {changeCurrency(
-                currency,
-                cartItems
-                  .map(item => {
-                    return item.price * item.quantity;
-                  })
-                  .reduce((a, b) => {
-                    return a + b;
-                  }, 0 + 18)
-              )}{" "}
-              {currency}
-            </p>
-          </div>
-        </div>
+        ) : (
+          ""
+        )}{" "}
         <div className="container">
           {cartItems.map((item, index) => {
             return <CartCard pizza={item} index={index} key={index}></CartCard>;
           })}
         </div>
+        {cartItems.length >= 1 ? (
+          <div className="checkout-btn" onClick={showModal}>
+            Porceed to Checkout
+          </div>
+        ) : (
+          <div className="empty-message">
+            Cart is empty please add item first
+          </div>
+        )}
       </div>
-      {cartItems.length >= 1 ? (
-        <div className="checkout-btn" onClick={showModal}>
-          Porceed to Checkout
-        </div>
-      ) : (
-        <div className="empty-message">Cart is empty please add item first</div>
-      )}
     </>
   );
 };
