@@ -7,7 +7,7 @@ export const currencyReducer = (state = inintState, action) => {
     case "changeCurrency":
       return {
         ...state,
-        currentCurrency: state.currentCurrency == "USD" ? "EURO" : "USD"
+        currentCurrency: state.currentCurrency == "USD" ? "EUR" : "USD"
       };
     default:
       return state;
