@@ -102,7 +102,7 @@ const AddProuctPage = () => {
               id="price"
               name="price"
               onChange={handleOnChange}
-              placeholder="Enter Pizza price"
+              placeholder="Enter Pizza price in USD"
             />
           </div>
         </div>

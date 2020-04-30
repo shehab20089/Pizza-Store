@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./style.scss";
+import { changeCurrency } from "../../util/reuseableMeathods";
 import { connect, Provider, useSelector, useDispatch } from "react-redux";
 const OrderCard = props => {
+  const currency = useSelector(state => state.currencyReducer.currentCurrency);
   return (
     <div className="order-container">
       <div className="order-title">
@@ -26,12 +28,15 @@ const OrderCard = props => {
         <p>Total Price:</p>
         <p>
           {" "}
-          {props.order.Products.map(item => {
-            return item.price * item.quantity;
-          }).reduce((a, b) => {
-            return a + b;
-          }, 0)}{" "}
-          $
+          {changeCurrency(
+            currency,
+            props.order.Products.map(item => {
+              return item.price * item.quantity;
+            }).reduce((a, b) => {
+              return a + b;
+            }, 0)
+          )}{" "}
+          {currency}
         </p>
       </div>
     </div>

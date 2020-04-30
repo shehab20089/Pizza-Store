@@ -56,6 +56,9 @@ function App() {
     }
     fetchData();
   }, []);
+  const changeCurrency = () => {
+    dispatch({ type: "changeCurrency" });
+  };
   const handleLogout = () => {
     localStorage.removeItem("pizza-token");
     dispatch({ type: "setUser", payload: {} });
@@ -75,6 +78,9 @@ function App() {
         <NavLink className="nav-link" activeClassName="activeLink" to="/cart">
           Cart
         </NavLink>
+        <a className="nav-link" onClick={changeCurrency}>
+          Change Currency
+        </a>
         {!status ? (
           <>
             <NavLink

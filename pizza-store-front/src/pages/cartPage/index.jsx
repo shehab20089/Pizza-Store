@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import CartCard from "../../components/cartCard";
 import CheckoutModal from "../../components/checkoutModal";
+import { changeCurrency } from "../../util/reuseableMeathods";
+
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import API from "../../api/api";
@@ -9,6 +11,7 @@ import "./style.scss";
 
 const Cart = () => {
   const cartItems = useSelector(state => state.cartReducer.cart);
+  const currency = useSelector(state => state.currencyReducer.currentCurrency);
   const history = useHistory();
   const dispatch = useDispatch();
   const [order, setorder] = useState({});
@@ -126,36 +129,92 @@ const Cart = () => {
               />
             </div>
           </div>
-          <div className="price-text"> Delivery price: 18 $</div>
+          <div className="price-text">
+            {" "}
+            Delivery price: {changeCurrency(currency, 18)} {currency}
+          </div>
           <div className="price-text">
             {" "}
             Order price:{" "}
-            {cartItems
-              .map(item => {
-                return item.price * item.quantity;
-              })
-              .reduce((a, b) => {
-                return a + b;
-              }, 0)}{" "}
-            $
+            {changeCurrency(
+              currency,
+              cartItems
+                .map(item => {
+                  return item.price * item.quantity;
+                })
+                .reduce((a, b) => {
+                  return a + b;
+                }, 0)
+            )}{" "}
+            {currency}
           </div>
           <div className="price-text">
             Total price:{" "}
-            {cartItems
-              .map(item => {
-                return item.price * item.quantity;
-              })
-              .reduce((a, b) => {
-                return a + b;
-              }, 0) + 18}{" "}
-            $
+            {changeCurrency(
+              currency,
+              cartItems
+                .map(item => {
+                  return item.price * item.quantity;
+                })
+                .reduce((a, b) => {
+                  return a + b;
+                }, 0 + 18)
+            )}{" "}
+            {currency}
           </div>
         </CheckoutModal>
       </div>
-      <div className="container">
-        {cartItems.map((item, index) => {
-          return <CartCard pizza={item} index={index} key={index}></CartCard>;
-        })}
+      <div className="cart-contaier">
+        <div className="price-container">
+          {" "}
+          <div className="cart-price">
+            {" "}
+            <p> Delivery price:</p>{" "}
+            <p>
+              {changeCurrency(currency, 18)} {currency}
+            </p>
+          </div>
+          <div className="cart-price">
+            <p> Order price: </p>
+            <p>
+              {" "}
+              {changeCurrency(
+                currency,
+                cartItems
+                  .map(item => {
+                    return item.price * item.quantity;
+                  })
+                  .reduce((a, b) => {
+                    return a + b;
+                  }, 0)
+              )}{" "}
+              {currency}{" "}
+            </p>
+          </div>
+          <div className="divider"></div>
+          <div className="cart-price">
+            <p> Total price: </p>
+            <p>
+              {" "}
+              {changeCurrency(
+                currency,
+                cartItems
+                  .map(item => {
+                    return item.price * item.quantity;
+                  })
+                  .reduce((a, b) => {
+                    return a + b;
+                  }, 0 + 18)
+              )}{" "}
+              {currency}
+            </p>
+          </div>
+        </div>
+        <div className="container">
+          {cartItems.map((item, index) => {
+            return <CartCard pizza={item} index={index} key={index}></CartCard>;
+          })}
+        </div>
       </div>
       {cartItems.length >= 1 ? (
         <div className="checkout-btn" onClick={showModal}>

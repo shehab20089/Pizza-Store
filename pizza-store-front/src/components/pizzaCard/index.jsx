@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./style.scss";
-import { useDispatch } from "react-redux";
+import { changeCurrency } from "../../util/reuseableMeathods";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
@@ -8,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const PizzaCard = props => {
   const dispatch = useDispatch();
+  const currency = useSelector(state => state.currencyReducer.currentCurrency);
 
   const [quantity, setquantity] = useState(1);
   const onQuantityChange = e => {
@@ -43,7 +45,9 @@ const PizzaCard = props => {
         </div>
         <div className="card-data">
           <p>Price per unit:</p>
-          <p>{props.pizza.price}$</p>
+          <p>
+            {changeCurrency(currency, props.pizza.price)} {currency}
+          </p>
         </div>
         <div className="card-data">
           <p>Quantity:</p>
