@@ -3,16 +3,17 @@ import { useHistory } from "react-router-dom";
 import AuthForm from "../../components/authForm/index";
 import API from "../../api/api";
 import { toast } from "react-toastify";
-
+import ClipLoader from "react-spinners/ClipLoader";
 import { useSelector, useDispatch } from "react-redux";
 
 const AddProuctPage = () => {
   const history = useHistory();
   const [productData, setproductData] = useState({});
-
+  const [loading, setloading] = useState(false);
   const dispatch = useDispatch();
   const submit = async event => {
     event.preventDefault();
+    setloading(true);
     console.log(productData);
     let frmd = new FormData();
 
@@ -36,10 +37,12 @@ const AddProuctPage = () => {
         type: "setProduct",
         payload: productResponse.data.Product
       });
+      setloading(false);
       toast.error("Pizza added successfully");
 
       history.push("/");
     } catch (err) {
+      setloading(false);
       toast.warn("an unexcepected error occured");
 
       console.log(err);
@@ -54,8 +57,22 @@ const AddProuctPage = () => {
     let imgFormData = e.target.files[0];
     setproductData({ ...productData, image: imgFormData });
   };
+  const rednerLoader = loading => {
+    if (loading)
+      return (
+        <div className="loading-container">
+          <ClipLoader
+            // css={override}
+            size={80}
+            color={"#f44336"}
+            loading={true}
+          />
+        </div>
+      );
+  };
   return (
     <div>
+      {rednerLoader(loading)}
       <AuthForm submit={submit} title="Add Pizza">
         <div className="input-group">
           <label htmlFor="name">Pizza Name:</label>
@@ -98,8 +115,9 @@ const AddProuctPage = () => {
           <label htmlFor="price">Price:</label>
           <div className="frm-input">
             <input
-              type="text"
+              type="number"
               id="price"
+              min="1"
               name="price"
               onChange={handleOnChange}
               placeholder="Enter Pizza price in USD"

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import AuthForm from "../../components/authForm/index";
+import ClipLoader from "react-spinners/ClipLoader";
 import { toast } from "react-toastify";
 import API from "../../api/api";
 import { useSelector, useDispatch } from "react-redux";
 
 const RegisterPage = () => {
   const history = useHistory();
+  const [loading, setloading] = useState(false);
   const [role, setrole] = useState("user");
   let changeActive = val => {
     setrole(val);
@@ -15,9 +17,11 @@ const RegisterPage = () => {
   const [registerData, setregisterData] = useState({});
   const submit = async event => {
     event.preventDefault();
+    setloading(true);
     let data = { ...registerData, IsAdmin: role == "admin" ? "admin" : false };
     console.log(data);
     if (data.confirmPass != data.password) {
+      setloading(false);
       toast.warn(`password and confirm password don't match`);
       return;
     }
@@ -27,11 +31,11 @@ const RegisterPage = () => {
       dispatch({ type: "changeStatus", payload: true });
       dispatch({ type: "setUser", payload: registerResponse.data.user });
       toast.error(`Register successfully`);
-
+      setloading(false);
       history.push("/");
     } catch (err) {
+      setloading(false);
       toast.warn(`${err.response.data.error}`);
-
       console.log("err.request.response");
       console.log(err.response.data.error);
     }
@@ -43,9 +47,22 @@ const RegisterPage = () => {
     console.log(value);
     setregisterData({ ...registerData, [name]: value });
   };
-
+  const rednerLoader = loading => {
+    if (loading)
+      return (
+        <div className="loading-container">
+          <ClipLoader
+            // css={override}
+            size={80}
+            color={"#f44336"}
+            loading={true}
+          />
+        </div>
+      );
+  };
   return (
     <div>
+      {rednerLoader(loading)}
       <AuthForm title="Register" submit={submit}>
         <div className="input-group">
           <label htmlFor="email">Email:</label>

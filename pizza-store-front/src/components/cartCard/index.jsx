@@ -6,6 +6,7 @@ const CartCard = props => {
   const dispatch = useDispatch();
   const [quantity, setquantity] = useState(props.pizza.quantity);
   const onQuantityChange = e => {
+    console.log(e.target.value);
     if (e.target.value > 50) {
       setquantity(50);
       dispatch({ type: "edititem", payload: { ...props.pizza, quantity: 50 } });
@@ -13,7 +14,7 @@ const CartCard = props => {
     } else if (e.target.value < 1) {
       console.log(quantity);
       setquantity(1);
-      dispatch({ type: "edititem", payload: { ...props.pizza, quantity: 50 } });
+      dispatch({ type: "edititem", payload: { ...props.pizza, quantity: 1 } });
 
       return;
     }
@@ -48,13 +49,7 @@ const CartCard = props => {
         <div className=" cart-item-footer">
           <div className="quntity">
             <p>Qty:</p>
-            <input
-              type="number"
-              onChange={onQuantityChange}
-              value={quantity}
-              max="50"
-              min="1"
-            />
+            <input type="number" onChange={onQuantityChange} value={quantity} />
           </div>
           <button onClick={removeFromCart}>Remove</button>
         </div>

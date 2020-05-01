@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CartCard from "../../components/cartCard";
 import CheckoutModal from "../../components/checkoutModal";
 import { changeCurrency } from "../../util/reuseableMeathods";
-
+import ClipLoader from "react-spinners/ClipLoader";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import API from "../../api/api";
@@ -10,6 +10,7 @@ import { connect, Provider, useSelector, useDispatch } from "react-redux";
 import "./style.scss";
 
 const Cart = () => {
+  const [loading, setloading] = useState(false);
   const cartItems = useSelector(state => state.cartReducer.cart);
   const currency = useSelector(state => state.currencyReducer.currentCurrency);
   const history = useHistory();
@@ -28,6 +29,7 @@ const Cart = () => {
       });
     }
     try {
+      setloading(true);
       let token = localStorage.getItem("pizza-token");
       let options = token
         ? {
@@ -39,10 +41,12 @@ const Cart = () => {
       console.log(options);
       let orderResponse = await API.post("/order/", { ...data }, options);
       dispatch({ type: "restCart" });
-      toast.error("order successfully submitted");
+      setloading(false);
 
+      toast.error("order successfully submitted");
       history.push("/");
     } catch (err) {
+      setloading(false);
       toast.warn("an unexcepected error occured");
 
       console.log(err.request.response);
@@ -78,8 +82,22 @@ const Cart = () => {
     }
     console.log(modalElement.classList);
   };
+  const rednerLoader = loading => {
+    if (loading)
+      return (
+        <div className="loading-container">
+          <ClipLoader
+            // css={override}
+            size={80}
+            color={"#f44336"}
+            loading={true}
+          />
+        </div>
+      );
+  };
   return (
     <>
+      {rednerLoader(loading)}
       <div id="modal" className={`modal-container`}>
         <CheckoutModal
           onClick={event => {
