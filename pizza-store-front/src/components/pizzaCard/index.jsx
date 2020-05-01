@@ -3,6 +3,7 @@ import "./style.scss";
 import { changeCurrency } from "../../util/reuseableMeathods";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ProgressiveImage from "react-progressive-image";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -35,7 +36,9 @@ const PizzaCard = props => {
     <div>
       <div className="card-container">
         <div className="image-container">
-          <img src={props.pizza.image} alt="no pizza image" />
+          <ProgressiveImage src={props.pizza.image} placeholder="pizzajpg.jpg">
+            {src => <img src={src} alt="no pizza image" />}
+          </ProgressiveImage>
         </div>
         <div className="card-title">
           <h2>{props.pizza.name}</h2>

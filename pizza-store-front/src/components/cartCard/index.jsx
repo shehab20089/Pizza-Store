@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./style.scss";
+import ProgressiveImage from "react-progressive-image";
 import { toast } from "react-toastify";
 import { connect, Provider, useSelector, useDispatch } from "react-redux";
 const CartCard = props => {
@@ -37,7 +38,12 @@ const CartCard = props => {
       <div className="cart-item-container">
         <div className="img-title">
           <div className="image-container">
-            <img src={props.pizza.image} alt="no pizza image" />
+            <ProgressiveImage
+              src={props.pizza.image}
+              placeholder="pizzajpg.jpg"
+            >
+              {src => <img src={src} alt="no pizza image" />}
+            </ProgressiveImage>
           </div>
           <div className="cart-item-title">
             <h2>{props.pizza.name}</h2>
