@@ -10,10 +10,9 @@ $secondryColor: #f44336;
   .logo {
     width: 10%;
 
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       margin-right: 11%;
     }
-
   }
 
   .logo img {
@@ -55,26 +54,27 @@ $secondryColor: #f44336;
     flex: 2;
     display: flex;
 
-    @media (max-width:768px) {
-
+    @media (max-width: 768px) {
       position: fixed;
-      padding-top: 5%;
+      padding-top: 9%;
       // top: 5%;
       left: -50%;
       height: 1000px;
       background: $primaryColor;
       flex-direction: column;
       z-index: 10000;
-
     }
 
     .closeMenu {
       display: none;
+      width: 100%;
+      z-index: 9999;
 
-      @media (max-width:768px) {
+      @media (max-width: 768px) {
         display: block;
         position: absolute;
         top: 1%;
+        text-align: right;
         color: white;
         right: 5%;
       }
@@ -98,7 +98,7 @@ $secondryColor: #f44336;
       font-size: 0.63em;
       transition: 0.4s;
 
-      @media (max-width:768px) {
+      @media (max-width: 768px) {
         // display: none;
         height: 50px;
         border-bottom: 0.5px solid white;
@@ -112,15 +112,13 @@ $secondryColor: #f44336;
     }
   }
 
-
-
   .hambIcon {
     display: none;
     width: 10%;
     align-items: center;
     justify-content: center;
 
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       display: flex;
       // position: absolute;
       top: 1%;
@@ -134,7 +132,6 @@ $secondryColor: #f44336;
       font-size: 1.2em;
       transition: 0.4s;
 
-
       &:hover {
         cursor: pointer;
         color: $secondryColor;
@@ -143,47 +140,34 @@ $secondryColor: #f44336;
   }
 }
 
-
 @keyframes hide-menu {
   from {
-
     left: 0;
   }
-
-
 
   to {
     left: -50%;
-    ;
   }
 }
 
-
-
 @keyframes show-menu {
   from {
-
     left: -45%;
   }
 
-
-
   to {
     left: 0;
-    ;
   }
 }
 
 .show-menu-animation {
-  @media (max-width:768px) {
-
+  @media (max-width: 768px) {
     animation: show-menu 1s forwards ease;
   }
 }
 
 .hide-menu-animation {
-  @media (max-width:768px) {
-
+  @media (max-width: 768px) {
     animation: hide-menu 1s forwards ease;
   }
 }
