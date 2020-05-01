@@ -9,6 +9,11 @@ $secondryColor: #f44336;
 
   .logo {
     width: 10%;
+
+    @media (max-width:768px) {
+      margin-right: 11%;
+    }
+
   }
 
   .logo img {
@@ -46,25 +51,144 @@ $secondryColor: #f44336;
     height: 50%;
   }
 
-  .nav-link {
-    cursor: pointer;
+  .nav-container {
+    flex: 2;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    // flex: 1;
-    width: 12%;
-    text-decoration: none;
-    color: white;
-    font-size: 0.63em;
-    transition: 0.4s;
 
-    &:hover {
-      color: $secondryColor;
+    @media (max-width:768px) {
+
+      position: fixed;
+      padding-top: 8%;
+      // top: 5%;
+      left: -50%;
+      height: 1000px;
+      background: $primaryColor;
+      flex-direction: column;
+      z-index: 10000;
+
+    }
+
+    .closeMenu {
+      display: none;
+
+      @media (max-width:768px) {
+        display: block;
+        position: absolute;
+        top: 1%;
+        color: white;
+        right: 5%;
+      }
+
+      &:hover {
+        cursor: pointer;
+        color: $secondryColor;
+      }
+    }
+
+    .nav-link {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // flex: 1;
+
+      width: 12vw;
+      text-decoration: none;
+      color: white;
+      font-size: 0.63em;
+      transition: 0.4s;
+
+      @media (max-width:768px) {
+        // display: none;
+        height: 50px;
+        border-bottom: 0.5px solid white;
+        width: 45vw;
+        z-index: 10000;
+      }
+
+      &:hover {
+        color: $secondryColor;
+      }
     }
   }
 
-  .activeLink {
-    // background-color: $secondryColor;
-    color: $secondryColor;
+
+
+  .hambIcon {
+    display: none;
+    width: 10%;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width:768px) {
+      display: flex;
+      // position: absolute;
+      top: 1%;
+      color: white;
+      right: 5%;
+    }
+
+    // background-color: #f44336;
+    .icon {
+      color: white;
+      font-size: 1.2em;
+      transition: 0.4s;
+
+
+      &:hover {
+        cursor: pointer;
+        color: $secondryColor;
+      }
+    }
   }
+}
+
+
+@keyframes hide-menu {
+  from {
+
+    left: 0;
+  }
+
+
+
+  to {
+    left: -50%;
+    ;
+  }
+}
+
+
+
+@keyframes show-menu {
+  from {
+
+    left: -45%;
+  }
+
+
+
+  to {
+    left: 0;
+    ;
+  }
+}
+
+.show-menu-animation {
+  @media (max-width:768px) {
+
+    animation: show-menu 1s forwards ease;
+  }
+}
+
+.hide-menu-animation {
+  @media (max-width:768px) {
+
+    animation: hide-menu 1s forwards ease;
+  }
+}
+
+.activeLink {
+  // background-color: $secondryColor;
+  color: $secondryColor !important;
 }

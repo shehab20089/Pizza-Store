@@ -7,6 +7,8 @@ import Cart from "./pages/cartPage/index";
 import Addproduct from "./pages/addProductPage/index";
 import HistoryPage from "./pages/historyPage";
 import SearchPage from "./pages/searchPage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import Error from "./pages/ErrorPage/index";
 import { useHistory, withRouter } from "react-router-dom";
@@ -46,12 +48,15 @@ function App() {
       });
       let token = localStorage.getItem("pizza-token");
       if (token) {
-        dispatch({ type: "changeStatus", payload: true });
-
-        let userResponse = await API.get("/user", {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        dispatch({ type: "setUser", payload: userResponse["data"].user });
+        try {
+          let userResponse = await API.get("/user", {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          dispatch({ type: "changeStatus", payload: true });
+          dispatch({ type: "setUser", payload: userResponse["data"].user });
+        } catch (err) {
+          localStorage.removeItem("pizza-token");
+        }
       }
     }
     fetchData();
@@ -70,6 +75,9 @@ function App() {
   return (
     <>
       <Header>
+        <div className="closeMenu">
+          <FontAwesomeIcon icon={faTimes} />
+        </div>
         {status ? <a className="nav-link">{"Hi " + user.firstName}</a> : ""}
 
         <NavLink className="nav-link" activeClassName="activeLink" exact to="/">
